@@ -1,6 +1,8 @@
+import { useContext } from "react"
 import { dummyFavorites } from "@/utils/dummy"
 import FavoriteListItem from "./FavoriteListItem"
 import styled from "@emotion/styled"
+import { ContactContext } from "@/context/contactContext"
 
 const S = {
   Container: styled.div`
@@ -21,12 +23,13 @@ const S = {
 }
 
 const FavoriteList = () => {
+  const { favorites } = useContext(ContactContext)
   return (
     <S.Container>
       <S.Label>Favorites</S.Label>
       <S.ItemList>
-        {dummyFavorites.map((favorite) => (
-          <FavoriteListItem contact={favorite} />
+        {favorites.map((favorite) => (
+          <FavoriteListItem key={favorite.id} contact={favorite} />
         ))}
       </S.ItemList>
     </S.Container>

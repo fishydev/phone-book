@@ -1,7 +1,9 @@
+import { useContext } from "react"
 import { IContact } from "@/types"
 import styled from "@emotion/styled"
 import { faker } from "@faker-js/faker"
 import { RemoveIcon } from "../Icons"
+import { ContactContext } from "@/context/contactContext"
 
 interface IFavoriteListItemProps {
   contact: IContact
@@ -25,6 +27,7 @@ const S = {
   `,
   Name: styled.span`
     font-weight: 600;
+    font-size: small;
   `,
   RemoveButton: styled.button`
     border-radius: 100%;
@@ -43,16 +46,18 @@ const S = {
 }
 
 const FavoriteListItem = (props: IFavoriteListItemProps) => {
+  const { contact } = props
+  const { deleteFavorite } = useContext(ContactContext)
   return (
     <div className="FavoriteListItem">
       <S.Item>
         <S.AvatarContainer>
-          <S.Avatar src={faker.image.avatar()} />
-          <S.RemoveButton>
+          <S.Avatar src={faker.image.avatarGitHub()} />
+          <S.RemoveButton onClick={() => deleteFavorite(contact.id)}>
             <RemoveIcon color="#c90000" />
           </S.RemoveButton>
         </S.AvatarContainer>
-        <S.Name>{`${props.contact.first_name}`}</S.Name>
+        <S.Name>{`${contact.first_name}`}</S.Name>
       </S.Item>
     </div>
   )

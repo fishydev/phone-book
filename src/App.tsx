@@ -1,9 +1,12 @@
+import { useState, useContext } from "react"
 import "./App.css"
 import { FavoriteList } from "@/components/FavoriteList"
 import { Search } from "@/components/Search"
 import { ContactList } from "@/components/ContactList"
 import styled from "@emotion/styled"
 import { AddIcon } from "./components/Icons"
+import ContactForm from "./components/Forms/ContactForm/ContactForm"
+import ContactProvider, { ContactContext } from "./context/contactContext"
 
 const S = {
   Container: styled.div`
@@ -30,14 +33,23 @@ const S = {
 }
 
 function App() {
+  const { updateShowForm, showForm } = useContext(ContactContext)
+
+  if (!useContext(ContactContext)) {
+    throw new Error(
+      "useContext(ContactContext) has to be used within <ContactProvider>"
+    )
+  }
+
   return (
     <S.Container>
       <Search />
       <FavoriteList />
       <ContactList />
-      <S.AddButton>
+      <S.AddButton onClick={() => updateShowForm(true)}>
         <AddIcon color="#ffffff" />
       </S.AddButton>
+      {showForm && <ContactForm />}
     </S.Container>
   )
 }

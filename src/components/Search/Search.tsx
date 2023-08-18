@@ -14,6 +14,7 @@ const S = {
     border: none;
     padding: 1rem 1rem 1rem 2.5rem;
     border-radius: 0.25rem;
+    background-color: gainsboro;
   `,
   Icon: styled.div`
     position: absolute;

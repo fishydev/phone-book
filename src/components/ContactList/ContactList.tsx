@@ -1,7 +1,8 @@
 import { dummyContacts } from "@/utils/dummy"
-import { memo } from "react"
+import { memo, useContext } from "react"
 import styled from "@emotion/styled"
 import ContactListItem from "./ContactListItem"
+import { ContactContext } from "@/context/contactContext"
 
 const S = {
   Container: styled.div`
@@ -13,10 +14,11 @@ const S = {
 }
 
 const Component = () => {
+  const { contacts } = useContext(ContactContext)
   return (
     <S.Container>
-      {dummyContacts.map((contact) => (
-        <ContactListItem contact={contact} />
+      {contacts.map((contact) => (
+        <ContactListItem key={contact.id} contact={contact} />
       ))}
     </S.Container>
   )

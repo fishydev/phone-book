@@ -1,4 +1,4 @@
-import { memo } from "react"
+import { memo, useContext } from "react"
 import styled from "@emotion/styled"
 import { faker } from "@faker-js/faker"
 import { IContact } from "@/types"
@@ -9,6 +9,7 @@ import {
   RemoveIcon,
 } from "../Icons"
 import { dummyFavorites } from "@/utils/dummy"
+import { ContactContext } from "@/context/contactContext"
 
 interface IContactListItemProps {
   contact: IContact
@@ -83,19 +84,44 @@ const S = {
 
 const Component = (props: IContactListItemProps) => {
   const { contact } = props
+
+  const {
+    deleteContact,
+    favorites,
+    addFavorite,
+    deleteFavorite,
+    selectContact,
+    updateShowForm,
+  } = useContext(ContactContext)
+
+  const isFavorited = (id: number) => {
+    return favorites.find((favorite) => favorite.id === id) ? true : false
+  }
+
+  const handleEditContact = (id: number) => {
+    selectContact(id)
+    updateShowForm(true)
+  }
+
   return (
     <S.Item>
-      <S.Avatar src={faker.image.avatar()} />
+      <S.Avatar src={faker.image.avatarGitHub()} />
       <S.Name>{`${contact.first_name} ${contact.last_name}`}</S.Name>
       <S.Number>{contact.phones[0].number}</S.Number>
-      <S.RemoveButton>
+      <S.RemoveButton onClick={() => deleteContact(contact.id)}>
         <RemoveIcon color="#f6363f" />
       </S.RemoveButton>
-      <S.EditButton>
+      <S.EditButton onClick={() => handleEditContact(contact.id)}>
         <EditIcon color="#2c2fff" />
       </S.EditButton>
-      <S.FavoriteButton>
-        {dummyFavorites.find((favorite) => favorite.id === contact.id) ? (
+      <S.FavoriteButton
+        onClick={() =>
+          isFavorited(contact.id)
+            ? deleteFavorite(contact.id)
+            : addFavorite(contact.id)
+        }
+      >
+        {isFavorited(contact.id) ? (
           <FavoriteIcon color="#ffdd00" />
         ) : (
           <FavoriteOutlineIcon color="#ffdd00" />
