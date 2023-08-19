@@ -3,6 +3,7 @@ import { ContactIcon, PhoneIcon } from "@/components/Icons"
 import { Input } from "@/components/Input"
 import styled from "@emotion/styled"
 import { ContactContext } from "@/context/contactContext"
+import { Button } from "@/components/Button"
 
 const S = {
   Container: styled.div`
@@ -46,27 +47,20 @@ const S = {
     flex-grow: 1;
     align-items: end;
   `,
-  SubmitButton: styled.button`
-    height: fit-content;
-    width: 100%;
+  SubmitButton: styled(Button)`
     border: 1px solid #2c2fff;
     background-color: #2c2fff;
-    display: block;
     color: white;
-    padding: 0.5rem 0;
-    border-radius: 0.5rem;
-    cursor: pointer;
   `,
-  CancelButton: styled.button`
-    height: fit-content;
-    width: 100%;
+  AddPhoneButton: styled(Button)`
+    border: 1px solid #2c2fff;
+    background-color: #2c2fff;
+    color: white;
+  `,
+  CancelButton: styled(Button)`
     border: 1px solid #d0d0d0;
     background-color: #d0d0d0;
-    display: block;
     color: black;
-    padding: 0.5rem 0;
-    border-radius: 0.5rem;
-    cursor: pointer;
   `,
 }
 
@@ -121,6 +115,18 @@ const ContactForm = () => {
     // console.log("cancelled")
   }
 
+  const handleAddNumber = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+    setPhones((prev) => {
+      return [
+        ...prev,
+        {
+          number: "",
+        },
+      ]
+    })
+  }
+
   const onChangeFirstName = (e: React.FormEvent<HTMLInputElement>) => {
     setFirstName(e.currentTarget.value)
   }
@@ -162,22 +168,18 @@ const ContactForm = () => {
             <PhoneIcon />
           </S.InputGroupIcon>
           <S.PhoneInputGroup>
-            {selectedContact ? (
-              phones.map((phone, index) => (
-                <Input
-                  key={phone.number}
-                  value={phone.number}
-                  onChange={(e) => onChangeNumber(index, e.target.value)}
-                />
-              ))
-            ) : (
+            {phones.map((phone, index) => (
               <Input
-                value={phones[0].number}
-                onChange={(e) => onChangeNumber(0, e.target.value)}
+                key={phone.number}
+                value={phone.number}
+                onChange={(e) => onChangeNumber(index, e.target.value)}
               />
-            )}
+            ))}
           </S.PhoneInputGroup>
         </S.InputGroupContainer>
+        <S.AddPhoneButton onClick={(e) => handleAddNumber(e)}>
+          Add Phone Number
+        </S.AddPhoneButton>
         <S.FormAction>
           <S.SubmitButton type="submit" onClick={handleSubmit}>
             Submit

@@ -5,6 +5,7 @@ export interface IContactContext {
   favorites: IContact[]
 
   selectedContact: IContact | undefined
+  selectedContactId: number | undefined
   showForm: boolean
 
   addContact: (contact: Omit<IContact, "id">) => void
@@ -15,6 +16,7 @@ export interface IContactContext {
   deleteFavorite: (id: number) => void
 
   selectContact: (id?: number) => void
+  updateSelectedContactId: (id?: number) => void
 
   updateShowForm: (show: boolean) => void
 }
