@@ -1,4 +1,3 @@
-import { dummyContacts } from "@/utils/dummy"
 import { memo, useContext } from "react"
 import styled from "@emotion/styled"
 import ContactListItem from "./ContactListItem"

@@ -82,22 +82,16 @@ const S = {
 const Component = (props: IContactListItemProps) => {
   const { contact } = props
 
-  const {
-    deleteContact,
-    favorites,
-    addFavorite,
-    deleteFavorite,
-    updateSelectedContactId,
-    loading,
-  } = useContext(ContactContext)
+  const { deleteContact, favorites, addFavorite, deleteFavorite, loading } =
+    useContext(ContactContext)
 
   const isFavorited = (id: number) => {
     return favorites.find((favorite) => favorite.id === id) ? true : false
   }
 
-  const handleClickEdit = (id: number) => {
-    updateSelectedContactId(id)
-  }
+  // const handleClickEdit = (id: number) => {
+  //   updateSelectedContactId(id)
+  // }
 
   return (
     <S.Item>

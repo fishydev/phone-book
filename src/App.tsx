@@ -1,4 +1,4 @@
-import { useState, useContext } from "react"
+import { useContext } from "react"
 import "./App.css"
 import { FavoriteList } from "@/components/FavoriteList"
 import { Search } from "@/components/Search"
@@ -6,8 +6,6 @@ import { ContactList } from "@/components/ContactList"
 import styled from "@emotion/styled"
 import { AddIcon } from "./components/Icons"
 import ContactForm from "./components/Forms/ContactForm/ContactForm"
-import ContactProvider, { ContactContext } from "./context/contactContext"
-import { Pagination } from "./components/Pagination"
 
 const S = {
   Container: styled.div`

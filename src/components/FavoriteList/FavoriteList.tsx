@@ -1,5 +1,4 @@
 import { useContext } from "react"
-import { dummyFavorites } from "@/utils/dummy"
 import FavoriteListItem from "./FavoriteListItem"
 import styled from "@emotion/styled"
 import { ContactContext } from "@/context/contactContext"

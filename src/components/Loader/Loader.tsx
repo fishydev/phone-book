@@ -1,6 +1,5 @@
 import styled from "@emotion/styled"
 import { LoadingIcon } from "../Icons"
-interface ILoaderProps extends React.ReactHTMLElement<HTMLElement> {}
 
 const S = {
   Loader: styled.div`

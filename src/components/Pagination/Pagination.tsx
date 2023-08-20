@@ -18,7 +18,7 @@ const S = {
 }
 
 const Pagination = () => {
-  const { page, updatePage, contacts, loading } = useContext(ContactContext)
+  const { page, updatePage, loading } = useContext(ContactContext)
   return (
     <S.Container>
       {page !== 1 && (

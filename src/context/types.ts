@@ -1,10 +1,5 @@
-import { IContact, IPhone } from "@/types"
-import {
-  ApolloError,
-  OperationVariables,
-  MutationResult as ApolloMutationResult,
-  QueryResult as ApolloQueryResult,
-} from "@apollo/client"
+import { IContact } from "@/types"
+import { ApolloError } from "@apollo/client"
 
 export interface ILoadingState {
   addContact: boolean
