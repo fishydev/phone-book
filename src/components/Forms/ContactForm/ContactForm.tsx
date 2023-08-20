@@ -68,10 +68,10 @@ const S = {
   `,
 }
 
-interface IFormErrors {
-  firstName?: string
-  lastName?: string
-}
+// interface IFormErrors {
+//   firstName?: string
+//   lastName?: string
+// }
 
 const ContactForm = () => {
   const {
@@ -93,28 +93,27 @@ const ContactForm = () => {
     selectedContact ? selectedContact.phones : [{ number: "" }]
   )
 
-  const [errors, setErrors] = useState<IFormErrors>({
-    firstName: "",
-    lastName: "",
-  })
+  // const [errors, setErrors] = useState<IFormErrors>({
+  //   firstName: "",
+  //   lastName: "",
+  // })
 
   const handleSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
 
-    const newErrors: IFormErrors = {}
-    if (!firstName.match(/^[A-Za-z]+$/)) {
-      newErrors.firstName = "First name must contain only alphabetic characters"
-    }
-    if (!lastName.match(/^[A-Za-z]+$/)) {
-      newErrors.lastName = "Last name must contain only alphabetic characters"
-    }
+    // const newErrors: IFormErrors = {}
+    // if (!firstName.match(/^[A-Za-z]+$/)) {
+    //   newErrors.firstName = "First name must contain only alphabets"
+    // }
+    // if (!lastName.match(/^[A-Za-z]+$/)) {
+    //   newErrors.lastName = "Last name must contain only alphabets"
+    // }
 
-    setErrors(newErrors)
+    // setErrors(newErrors)
 
-    // If there are errors, prevent form submission
-    if (Object.keys(newErrors).length > 0) {
-      return
-    }
+    // if (Object.keys(newErrors).length > 0) {
+    //   return
+    // }
 
     if (selectedContact) {
       updateContact({
