@@ -6,6 +6,7 @@ import { ContactList } from "@/components/ContactList"
 import styled from "@emotion/styled"
 import { AddIcon } from "./components/Icons"
 import ContactForm from "./components/Forms/ContactForm/ContactForm"
+import { ContactContext } from "./context/contactContext"
 
 const S = {
   Container: styled.div`
