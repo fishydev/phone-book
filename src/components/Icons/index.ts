@@ -6,6 +6,9 @@ import EditIcon from "./EditIcon"
 import AddIcon from "./AddIcon"
 import ContactIcon from "./ContactIcon"
 import PhoneIcon from "./PhoneIcon"
+import ChevronLeftIcon from "./ChevronLeftIcon"
+import ChevronRightIcon from "./ChevronRightIcon"
+import LoadingIcon from "./LoadingIcon"
 
 export {
   SearchIcon,
@@ -16,4 +19,7 @@ export {
   AddIcon,
   ContactIcon,
   PhoneIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  LoadingIcon,
 }

@@ -17,10 +17,16 @@ const S = {
     font-weight: 400;
     font-size: small;
   `,
+  Error: styled.span`
+    font-weight: 400;
+    font-size: small;
+    color: #ff3636;
+  `,
 }
 
 interface IInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string
+  error?: string
 }
 
 const Input = (props: IInputProps) => {
@@ -28,6 +34,7 @@ const Input = (props: IInputProps) => {
     <S.Container>
       {props.label ? <S.Label>{props.label}</S.Label> : null}
       <S.Input {...props} />
+      {props.error ? <S.Error>{props.error}</S.Error> : null}
     </S.Container>
   )
 }

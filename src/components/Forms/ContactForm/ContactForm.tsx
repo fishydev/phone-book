@@ -4,6 +4,7 @@ import { Input } from "@/components/Input"
 import styled from "@emotion/styled"
 import { ContactContext } from "@/context/contactContext"
 import { Button } from "@/components/Button"
+import { Loader } from "@/components/Loader"
 
 const S = {
   Container: styled.div`
@@ -12,6 +13,8 @@ const S = {
     position: absolute;
     z-index: 10;
     background-color: white;
+    display: flex;
+    justify-content: center;
   `,
   Form: styled.form`
     display: flex;
@@ -19,6 +22,7 @@ const S = {
     padding: 1rem;
     gap: 1rem;
     height: 100%;
+    max-width: 1024px;
   `,
   InputGroupContainer: styled.div`
     display: grid;
@@ -64,6 +68,11 @@ const S = {
   `,
 }
 
+interface IFormErrors {
+  firstName?: string
+  lastName?: string
+}
+
 const ContactForm = () => {
   const {
     selectedContact,
@@ -71,7 +80,7 @@ const ContactForm = () => {
     updateContact,
     addContact,
     updateShowForm,
-    showForm,
+    loading,
   } = useContext(ContactContext)
 
   const [firstName, setFirstName] = useState(
@@ -84,8 +93,29 @@ const ContactForm = () => {
     selectedContact ? selectedContact.phones : [{ number: "" }]
   )
 
+  const [errors, setErrors] = useState<IFormErrors>({
+    firstName: "",
+    lastName: "",
+  })
+
   const handleSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
+
+    const newErrors: IFormErrors = {}
+    if (!firstName.match(/^[A-Za-z]+$/)) {
+      newErrors.firstName = "First name must contain only alphabetic characters"
+    }
+    if (!lastName.match(/^[A-Za-z]+$/)) {
+      newErrors.lastName = "Last name must contain only alphabetic characters"
+    }
+
+    setErrors(newErrors)
+
+    // If there are errors, prevent form submission
+    if (Object.keys(newErrors).length > 0) {
+      return
+    }
+
     if (selectedContact) {
       updateContact({
         id: selectedContact?.id,
@@ -170,7 +200,7 @@ const ContactForm = () => {
           <S.PhoneInputGroup>
             {phones.map((phone, index) => (
               <Input
-                key={phone.number}
+                key={index}
                 value={phone.number}
                 onChange={(e) => onChangeNumber(index, e.target.value)}
               />
@@ -181,8 +211,13 @@ const ContactForm = () => {
           Add Phone Number
         </S.AddPhoneButton>
         <S.FormAction>
-          <S.SubmitButton type="submit" onClick={handleSubmit}>
-            Submit
+          <S.SubmitButton
+            type="submit"
+            onClick={handleSubmit}
+            disabled={loading.addContact}
+          >
+            {loading.addContact && <Loader />}
+            {!loading.addContact && "Submit"}
           </S.SubmitButton>
           <S.CancelButton onClick={handleCancel}>Cancel</S.CancelButton>
         </S.FormAction>

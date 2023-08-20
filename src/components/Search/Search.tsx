@@ -1,6 +1,8 @@
-import { memo } from "react"
+import { useContext, useEffect, useState } from "react"
 import { SearchIcon } from "@/components/Icons"
 import styled from "@emotion/styled"
+import { ContactContext } from "@/context/contactContext"
+import { useDebounce } from "@uidotdev/usehooks"
 
 const S = {
   Container: styled.div`
@@ -27,17 +29,28 @@ const S = {
   `,
 }
 
-const Component = () => {
+const Search = () => {
+  const { updateQuery } = useContext(ContactContext)
+  const [query, setQuery] = useState("")
+
+  const debouncedQuery = useDebounce(query, 1000)
+
+  useEffect(() => {
+    updateQuery(debouncedQuery)
+  }, [debouncedQuery])
+
   return (
     <S.Container>
       <S.Icon>
         <SearchIcon />
       </S.Icon>
-      <S.Input type="text" />
+      <S.Input
+        type="text"
+        value={query}
+        onChange={(e) => setQuery(e.currentTarget.value)}
+      />
     </S.Container>
   )
 }
-
-const Search = memo(Component)
 
 export default Search

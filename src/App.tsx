@@ -7,14 +7,16 @@ import styled from "@emotion/styled"
 import { AddIcon } from "./components/Icons"
 import ContactForm from "./components/Forms/ContactForm/ContactForm"
 import ContactProvider, { ContactContext } from "./context/contactContext"
+import { Pagination } from "./components/Pagination"
 
 const S = {
   Container: styled.div`
-    border: 1px solid black;
     height: 100%;
     width: 100%;
     display: flex;
     flex-direction: column;
+    position: relative;
+    max-width: 1024px;
   `,
   AddButton: styled.button`
     display: flex;

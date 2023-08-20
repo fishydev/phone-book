@@ -18,7 +18,14 @@ const S = {
   ItemList: styled.div`
     display: flex;
     gap: 0.5rem;
+    max-width: 100%;
     overflow-x: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    ::-webkit-scrollbar {
+      width: 0;
+      height: 0;
+    }
   `,
 }
 
